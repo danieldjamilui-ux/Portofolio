@@ -34,7 +34,7 @@ export function Skills() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   return (
-    <section id="skills" className="py-10 md:py-16 lg:py-28 relative overflow-hidden">
+    <section id="skills" className="scroll-mt-24">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950" />
       

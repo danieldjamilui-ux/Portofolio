@@ -3,13 +3,24 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Download, Rocket, ChevronRight } from 'lucide-react';
 import { LanyardCard } from './LanyardCard';
+import { useEffect, useState } from "react";
+import { useIsMobile } from "/Portofolio/src/app/components/ui/use-mobile";
 
 export const Hero: React.FC = () => {
+  const isMobile = useIsMobile();
+
   return (
     <section
       id="hero"
       className="relative min-h-screen pt-24 pb-20 flex flex-col items-center justify-center overflow-hidden"
-    >
+      >
+      {!isMobile && (
+        <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] animate-pulse" />
+            <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[150px]" />
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+          </div>
+        )}
       {/* Background Ambience */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] animate-pulse" />
@@ -23,15 +34,19 @@ export const Hero: React.FC = () => {
 
         {/* Hero Content */}
         <div className="max-w-4xl mx-auto text-center mt-8">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        <motion.h1
+          initial={{ opacity: 0, y: isMobile ? 10 : 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.5,
+            delay: isMobile ? 0.1 : 2.1,
+            ease: "easeOut",
+          }}
             className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tight text-white mb-6"
           >
             Welcome <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500">
-              to My Creative Portfolio
+              to My Portfolio
             </span>
           </motion.h1>
 

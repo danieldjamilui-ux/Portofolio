@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Mail, Github, Linkedin, MapPin, Send, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "./hooks/useInView";
+import emailjs from "@emailjs/browser";
 
 export function Contact() {
   const { ref, inView } = useInView({ threshold: 0.1 });
@@ -13,20 +14,34 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+
+  try {
+    await emailjs.send(
+      "service_vu9tj6i",      // SERVICE ID
+      "template_kksbf1u",    // TEMPLATE ID
+      {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      },
+      "AoMWg9Nmy85AHbY5_"
+    );
+
     setIsSubmitted(true);
     setFormData({ name: "", email: "", message: "" });
-    
-    // Reset submitted state after 3 seconds
     setTimeout(() => setIsSubmitted(false), 3000);
-  };
+  } catch (error) {
+    alert("Gagal mengirim pesan");
+    console.error(error);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -48,16 +63,16 @@ export function Contact() {
     {
       icon: Github,
       title: "GitHub",
-      value: "github.com/daniel",
-      href: "https://github.com",
+      value: "github.com/danieldjamilui-ux",
+      href: "https://github.com/danieldjamilui-ux",
       color: "from-gray-600 to-gray-400",
     },
     {
-      icon: Linkedin,
-      title: "LinkedIn",
-      value: "linkedin.com/in/daniel",
-      href: "https://linkedin.com",
-      color: "from-blue-600 to-blue-400",
+      icon: Send,
+      title: "WhatsApp",
+      value: "+62 812 4594 8561",
+      href: "https://wa.me/6281245948561?text=Halo%20Daniel,%0A%0ASaya%20tertarik%20untuk%20berdiskusi%20mengenai%20proyek.%0ATerima%20kasih.",
+      color: "from-green-500 to-emerald-500",
     },
     {
       icon: MapPin,
@@ -69,7 +84,7 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-10 md:py-16 lg:py-28 relative overflow-hidden">
+    <section id="contact" className="scroll-mt-24">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950" />
       
@@ -149,8 +164,8 @@ export function Contact() {
             >
               <p className="text-slate-400">Ikuti saya:</p>
               {[
-                { icon: Github, href: "https://github.com" },
-                { icon: Linkedin, href: "https://linkedin.com" },
+                { icon: Github, href: "https://github.com/danieldjamilui-ux" },
+                { icon: Send, href: "https://wa.me/6281245948561?text=Halo%20Daniel,%0A%0ASaya%20tertarik%20untuk%20berdiskusi%20mengenai%20proyek.%0ATerima%20kasih." },
                 { icon: Mail, href: "mailto:danieldjamilui@gmail.com" },
               ].map(({ icon: Icon, href }, index) => (
                 <motion.a

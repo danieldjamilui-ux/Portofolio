@@ -45,7 +45,7 @@ export default function App() {
       <footer className="relative z-10 bg-slate-950/50 backdrop-blur-sm border-t border-slate-800 py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-slate-400">
-            © 2025 Daniel paululs. 
+             Daniel Paululs21. 
           </p>
         </div>
       </footer>

@@ -10,10 +10,10 @@ const projects = [
     description:
       "Website portofolio modern yang menampilkan profil, skill, dan proyek secara interaktif dan responsif. Dibangun menggunakan React + TypeScript untuk struktur aplikasi yang kuat, Next.js untuk performa dan routing, Tailwind CSS untuk desain UI yang rapi dan konsisten, serta Framer Motion untuk animasi halus. Website ini mendukung tampilan responsif dan pengalaman pengguna yang modern",
     image:
-      "https://images.unsplash.com/photo-1677214467820-ab069619bbb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3ZWIlMjBkZXNpZ258ZW58MXx8fHwxNzY2ODU1MDIyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://res.cloudinary.com/ddmlcj32g/image/upload/v1768493268/59_c_pad_ar_16_9_nyrone.png",
     tags: ["React", "TypeScript", "Next.js", "TailwindCSS"],
-    link: "#",
-    github: "#",
+    link: "https://danieldjamilui-ux.github.io/Portofolio/",
+    github: "https://github.com/danieldjamilui-ux",
     featured: true,
   },
   {
@@ -22,10 +22,10 @@ const projects = [
     description:
       "Aplikasi ini diharapkan dapat mempermudah klien dan bidang peternakan dalam memperoleh informasi secara cepat dan akurat. Melalui aplikasi ini, pengguna dapat mengakses jadwal pemeriksaan ternak, status kesehatan yang selalu diperbarui, ketersediaan gudang, data peternak yang memiliki klien tetap, serta struktur pegawai. ",
     image:
-      "https://images.unsplash.com/photo-1605108222700-0d605d9ebafe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzY2ODU2MzUxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "https://res.cloudinary.com/ddmlcj32g/image/upload/v1768493839/36_c_pad_w_1000_h_500_qikxno.png",
     tags: ["dark mode", "Flutter", "Firebase", "Cloudinary"],
-    link: "#",
-    github: "#",
+    link: "https://youtu.be/HvnXUIPtbyM",
+    github: "https://github.com/danieldjamilui-ux",
     featured: false,
   },
 ];
@@ -34,7 +34,7 @@ export function Projects() {
   const { ref, inView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="projects" className="py-10 md:py-16 lg:py-28 relative overflow-hidden">
+    <section id="projects" className="scroll-mt-24">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950" />
       
@@ -54,7 +54,7 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -62,7 +62,9 @@ export function Projects() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
-              className="group relative"
+              className="group relative focus:outline-none"
+              tabIndex={0}
+
             >
               {/* Glow effect */}
               <motion.div
@@ -80,9 +82,21 @@ export function Projects() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-60" />
                   
                   {/* Overlay buttons */}
-                  <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div
+                  className="
+                    absolute inset-0 flex items-center justify-center gap-4
+                    opacity-0
+                    group-focus-within:opacity-100
+                    md:group-hover:opacity-100
+                    transition-opacity duration-300
+                  "
+                >
+
+
                     <motion.a
                       href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                       className="p-3 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
@@ -91,6 +105,8 @@ export function Projects() {
                     </motion.a>
                     <motion.a
                       href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                       className="p-3 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
