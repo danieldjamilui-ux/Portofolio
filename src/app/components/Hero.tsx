@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, Download, Rocket, ChevronRight } from 'lucide-react';
 import { LanyardCard } from './LanyardCard';
 import { useEffect, useState } from "react";
-import { useIsMobile } from "/Portofolio/src/app/components/ui/use-mobile";
+import { useIsMobile } from "./ui/use-mobile";
 
 export const Hero: React.FC = () => {
   const isMobile = useIsMobile();
